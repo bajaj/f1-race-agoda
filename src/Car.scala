@@ -3,7 +3,7 @@
   */
 class Car(val number:Integer) {
     val handlingFactor = 0.8
-    val topSpeed = 150.0 + 10*number
+    val topSpeed = (150.0 + 10*number) * (5/18.0)
     val acceleration = 2*number
 
     var nitro = 1
@@ -13,16 +13,16 @@ class Car(val number:Integer) {
     def useNitroIsPossible(): Unit = {
       if (nitro != 0) {
         nitro -= 1
-        speed = Math.max(speed*2, topSpeed)
+        updateSpeed(speed*2)
       }
     }
 
-   def useHandLing(): Unit = {
-     speed = handlingFactor * speed
+   def useHandLing() {
+     updateSpeed(handlingFactor * speed)
    }
 
-   def accelerate(time: Int): Unit = {
-     speed += acceleration*time
+   def accelerate(time: Int) {
+     updateSpeed(speed + acceleration*time)
    }
 
    def driveForSeconds(time: Int): Unit = {
@@ -43,4 +43,9 @@ class Car(val number:Integer) {
     val state = Seq(number)
     state.map(_.hashCode()).foldLeft(0)((a, b) => 31 * a + b)
   }
+
+  private def updateSpeed(s: Double) = {
+    speed = Math.min(topSpeed, s)
+  }
+
 }

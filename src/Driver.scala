@@ -1,13 +1,14 @@
 /**
   * Created by bajaj on 02/06/17.
   */
-class Driver(val car:Car, var distanceFromStartPosition:Double, val race: Race) {
+class Driver(val car:Car, val startingPositionDistance:Double, val race: Race) {
    var totalDriveTime = 0
+   var distanceFromStartPosition = startingPositionDistance
 
    def driveForSeconds(time: Int): Unit = {
      car.driveForSeconds(time)
      totalDriveTime += time
-     distanceFromStartPosition += car.distanceTravelled
+     distanceFromStartPosition = startingPositionDistance + car.distanceTravelled
    }
 
    def handleCarAfterDriving(): Unit = {

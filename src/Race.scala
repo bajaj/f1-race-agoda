@@ -31,9 +31,9 @@ class Race(val numberOfTeams:Integer, val lengthOfTrack:Integer) extends RaceI {
   }
 
   def printRaceStatus() = {
-    println("DriverId CompletionTime  Speed")
+    println("DriverId CompletionTime(sec)  Speed(m/s)")
     drivers.sortWith((d1, d2) => d1.totalDriveTime < d2.totalDriveTime)
-            .foreach(d => println(d.car.number,"     ",d.totalDriveTime, "               ", d.car.speed))
+            .foreach(d => println(d.car.number,"         ",d.totalDriveTime, "                 ", d.car.speed))
   }
 
   def driverCompletedTheRace(driver: Driver) : Boolean = {

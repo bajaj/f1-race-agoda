@@ -13,18 +13,18 @@ class Race(val numberOfTeams:Integer, val lengthOfTrack:Integer) extends RaceI {
     val timeInterval = 2
 
     while(!raceFinished()) {
-      drivers.foreach(d => if(!driverCompletedTheRace(d)) {
-        d.driveForSeconds(timeInterval)
-      })
-      drivers.foreach(d => if(!driverCompletedTheRace(d)) {
-        d.handleCarAfterDriving()
-      })
+      drivers.foreach(d => d.driveForSeconds(timeInterval))
+      updateRaceStatus()
+      drivers.foreach(d => d.handleCarAfterDriving())
     }
 
     println("Race is finished")
     printRaceStatus()
   }
 
+  def updateRaceStatus() = {
+    drivers.filter(d => !d.completedTheRace).foreach(d => d.completedTheRace=driverCompletedTheRace(d))
+  }
   def raceFinished() : Boolean = {
     drivers.foreach(d => if(!driverCompletedTheRace(d)) return false)
     true
@@ -54,12 +54,14 @@ class Race(val numberOfTeams:Integer, val lengthOfTrack:Integer) extends RaceI {
     }
   }
 
-  override def isAmLast(driver: Driver): Boolean = drivers.sortWith(sortByDistanceFromStart).last.equals(driver)
+  override def isIAmLast(driver: Driver): Boolean = drivers.sortWith(sortByDistanceFromStart).last.equals(driver)
 
 
   override def anyCarAroundTenMeters(driver: Driver): Boolean = {
      def nextDriver(driver: Driver): Driver = {
        val temp = drivers.sortWith(sortByDistanceFromStart)
+       temp(temp.indexOf(driver) - 1)
+       temp(temp.indexOf(driver) - 1)
        temp(temp.indexOf(driver) - 1)
      }
 

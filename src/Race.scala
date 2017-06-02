@@ -16,7 +16,9 @@ class Race(val numberOfTeams:Integer, val lengthOfTrack:Integer) extends RaceI {
       drivers.foreach(d => if(!driverCompletedTheRace(d)) {
         d.driveForSeconds(timeInterval)
       })
-      drivers.foreach(d => d.handleCarAfterDriving())
+      drivers.foreach(d => if(!driverCompletedTheRace(d)) {
+        d.handleCarAfterDriving()
+      })
     }
 
     println("Race is finished")
@@ -35,20 +37,20 @@ class Race(val numberOfTeams:Integer, val lengthOfTrack:Integer) extends RaceI {
   }
 
   def driverCompletedTheRace(driver: Driver) : Boolean = {
-    driver.distanceFromStartPosition >= lengthOfTrack
+    driver.distanceTravelled >= lengthOfTrack
   }
 
   def sortByDistanceFromStart(d1:Driver, d2: Driver) = {
-    d1.distanceFromStartPosition > d2.distanceFromStartPosition
+    d1.distanceTravelled > d2.distanceTravelled
   }
 
 
   def setStartPosition() = {
     for(a <- 1 to numberOfTeams){
       if(a==1)
-        drivers(a-1).distanceFromStartPosition = 0
+        drivers(a-1).startingPositionDistance = 0
       else
-        drivers(a-1).distanceFromStartPosition = drivers(a-2).distanceFromStartPosition - (a-1)*200
+        drivers(a-1).startingPositionDistance = drivers(a-2).startingPositionDistance - (a-1)*200
     }
   }
 
@@ -62,7 +64,7 @@ class Race(val numberOfTeams:Integer, val lengthOfTrack:Integer) extends RaceI {
      }
 
      if(!isIAmFirst(driver))
-       return (nextDriver(driver).distanceFromStartPosition - driver.distanceFromStartPosition) <= 10.0
+       return (nextDriver(driver).distanceTravelled - driver.distanceTravelled) <= 10.0
 
      false
   }

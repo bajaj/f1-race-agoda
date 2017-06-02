@@ -1,4 +1,4 @@
-package java.main
+package scala.com.agoda
 
 /**
   * Created by bajaj on 02/06/17.
@@ -8,7 +8,7 @@ class Race(val numberOfTeams:Integer, val lengthOfTrack:Integer) extends RaceI {
   val drivers = (for (i <- (1 to numberOfTeams).toList) yield new Driver(new Car(i), 0, this)).toList
 
   def startRace(): Unit = {
-    println("java.main.Race is starting")
+    println("main.java.com.agoda.Race is starting")
     setStartPosition()
     val timeInterval = 2
 
@@ -18,7 +18,7 @@ class Race(val numberOfTeams:Integer, val lengthOfTrack:Integer) extends RaceI {
       drivers.foreach(d => d.handleCarAfterDriving())
     }
 
-    println("java.main.Race is finished")
+    println("main.java.com.agoda.Race is finished")
     printRaceStatus()
   }
 

@@ -10,7 +10,7 @@ object Start extends App {
 
     println("Enter length of race track")
     val lengthRaceTrack = io.StdIn.readInt().ensuring(_ > 1, "Length of track should be greater than 1")
-    
+
     val r = new Race(noOfTeams, lengthRaceTrack)
 
     r.startRace()

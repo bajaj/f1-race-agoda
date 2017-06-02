@@ -23,11 +23,10 @@ class Race(val numberOfTeams:Integer, val lengthOfTrack:Integer) extends RaceI {
   }
 
   def updateRaceStatus() = {
-    drivers.filter(d => !d.completedTheRace).foreach(d => d.completedTheRace=driverCompletedTheRace(d))
+    markDriversRaceCompleted()
   }
   def raceFinished() : Boolean = {
-    drivers.foreach(d => if(!driverCompletedTheRace(d)) return false)
-    true
+    !anyDriverRemainingToFinish
   }
 
   def printRaceStatus() = {
@@ -35,6 +34,10 @@ class Race(val numberOfTeams:Integer, val lengthOfTrack:Integer) extends RaceI {
     drivers.sortWith((d1, d2) => d1.totalDriveTime < d2.totalDriveTime)
             .foreach(d => println(d.car.number,"         ",d.totalDriveTime, "                 ", d.car.speed))
   }
+
+  def markDriversRaceCompleted() = drivers.filter(d => !d.completedTheRace).foreach(d => d.completedTheRace=driverCompletedTheRace(d))
+
+  def anyDriverRemainingToFinish() = drivers.exists(d => !d.completedTheRace)
 
   def driverCompletedTheRace(driver: Driver) : Boolean = {
     driver.distanceTravelled >= lengthOfTrack

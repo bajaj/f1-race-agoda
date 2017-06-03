@@ -73,4 +73,15 @@ class CarTest extends FunSuite {
         assert(car.speed == 24)
     }
 
+    test("check car equals method"){
+        val car1 = new Car(3)
+        val car2 = new Car(3)
+
+        val car4 = new Car(4)
+
+        assert(car1.equals(car2))
+        assert(!car1.equals(car4))
+        assert(!car1.equals(3))
+    }
+
 }

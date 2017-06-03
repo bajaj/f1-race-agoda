@@ -3,7 +3,7 @@ package scala.com.agoda
 /**
   * Created by bajaj on 02/06/17.
   */
-class Driver(val car:Car, var startingPositionDistance:Double, val race: Race) {
+class Driver(val car:Car, val startingPositionDistance:Double, val race: Race) {
    var totalDriveTime = 0
    var distanceTravelled = startingPositionDistance
    var completedTheRace = false

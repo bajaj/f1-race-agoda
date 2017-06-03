@@ -1,6 +1,7 @@
 package scala.com.agoda
 
 import scala.collection.mutable.ListBuffer
+import scala.com.agoda.interface.RaceI
 
 /**
   * Created by bajaj on 02/06/17.

@@ -1,14 +1,16 @@
 package scala.com.agoda
 
+import scala.com.agoda.interface.DriverI
+
 /**
   * Created by bajaj on 02/06/17.
   */
-class Driver(val car:Car, val startingPositionDistance:Double, val race: Race) {
+class Driver(val car:Car, val startingPositionDistance:Double, val race: Race) extends DriverI {
    var totalDriveTime = 0
    var distanceTravelled = startingPositionDistance
    var completedTheRace = false
 
-   def driveForSeconds(time: Int) : Unit = {
+  override def driveForSeconds(time: Int) : Unit = {
      if(completedTheRace)
        return
      car.driveForSeconds(time)
@@ -16,7 +18,7 @@ class Driver(val car:Car, val startingPositionDistance:Double, val race: Race) {
      distanceTravelled = startingPositionDistance + car.distanceTravelled
    }
 
-   def handleCarAfterDriving(): Unit = {
+  override def handleCarAfterDriving(): Unit = {
      if(completedTheRace)
        return
      if (race.anyCarAroundTenMeters(this))

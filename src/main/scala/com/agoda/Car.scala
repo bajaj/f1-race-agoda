@@ -1,9 +1,11 @@
 package scala.com.agoda
 
+import scala.com.agoda.interface.CarI
+
 /**
   * Created by bajaj on 02/06/17.
   */
-class Car(val number:Integer) {
+class Car(val number:Integer) extends CarI{
     val handlingFactor = 0.8
     val topSpeed = (150.0 + 10*number) * (5/18.0)
     val acceleration = 2*number
